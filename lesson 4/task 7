@@ -1,0 +1,6 @@
+num = int(input())
+first = num % 10
+second = num % 100 // 10
+third = num % 1000 // 100
+sum_num = (first + second + third)
+print('У числа', num, 'сумма последних трёх цифр равна', sum_num)
