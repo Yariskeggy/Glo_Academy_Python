@@ -1,0 +1,7 @@
+num = int(input())
+first = num // 1000
+second = num // 100 % 10
+third = num % 100 // 10
+fourth = num % 10
+max_num = max(first, second, third, fourth)
+print('У числа', num, 'максимальная цифра равна', max_num)
