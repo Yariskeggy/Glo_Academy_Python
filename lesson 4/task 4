@@ -1,0 +1,7 @@
+r = int(input())
+k = float(input()) / 100
+lot = int(input())
+sum_num = ((r + k) * lot)
+ruble = int(sum_num)
+penny = int(sum_num * 100) % 100
+print('За', lot, 'мяча нужно заплатить', ruble, 'рублей', penny, 'копеек')
