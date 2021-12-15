@@ -1,0 +1,22 @@
+a = int(input())
+
+if not a % 2 == 0 and a >= 1 and a <= 9:
+    print('Красное')
+elif  a % 2 == 0 and a >= 2 and a <= 10:
+    print('Чёрное')    
+elif not a % 2 == 0 and a >= 11 and a <= 17:
+    print('Чёрное')
+elif a % 2 == 0 and a >= 12 and a <= 18:
+    print('Красное')
+elif not a % 2 == 0 and a >= 19 and a <= 27:
+    print('Красное')
+elif a % 2 == 0 and a >= 20 and a <= 28:
+    print('Чёрное')      
+elif not a % 2 == 0 and a >= 29 and a <= 35:
+    print('Чёрное')
+elif a % 2 == 0 and a >= 30 and a <= 36:
+    print('Красное')
+elif a == 0 and a < 36:
+    print('Зелёное')
+else:
+    print('ошибка ввода')
