@@ -1,0 +1,16 @@
+num = int(input())
+
+first = num // 100000
+second = num // 10000 % 10
+third = num // 1000 % 10
+fourth = num // 100 % 10
+fifth = num % 100 // 10
+sixth = num % 10
+
+a = first + second + third
+b = fourth + fifth + sixth
+
+if a == b:
+    print('Билет', num, 'счастливый')
+else:
+    print('Билет', num, 'НЕсчастливый')
