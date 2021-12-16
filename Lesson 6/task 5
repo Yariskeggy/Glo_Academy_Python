@@ -1,0 +1,6 @@
+mail = input()
+
+if '@' and '.' in mail:
+    print('Корректный')
+else:
+    print('Некорректный')
