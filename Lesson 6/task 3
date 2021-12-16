@@ -1,0 +1,14 @@
+a = input()
+b = input()
+c = input()
+
+first = len(a)
+second = len(b)
+third = len(c)
+
+if first > second and first > third:
+    print(a)
+elif second > first and second > third:
+    print(b)
+else:
+    print(c)
