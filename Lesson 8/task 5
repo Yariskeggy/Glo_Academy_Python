@@ -1,0 +1,13 @@
+n = int(input())
+
+negative = 0
+positive = 0
+
+while n != 0:
+    if n >= 0:
+        positive += 1
+    else:
+        negative += 1
+    n = int(input())    
+        
+print(positive * negative)
