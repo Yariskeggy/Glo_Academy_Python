@@ -1,0 +1,15 @@
+n = int(input())
+ch = 0
+nch = 0
+
+for i in range(n):
+    num = int(input())
+    if num % 2 == 0:
+        ch += 1
+    else:
+        nch += 1
+
+if nch != 0 and ch == 0:
+    print('YES')
+else:
+    print('NO')
