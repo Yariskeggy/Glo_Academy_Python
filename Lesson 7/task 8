@@ -1,16 +1,16 @@
 n = int(input())
 
-max = 0
-min = n
+mx = 0
+mn = n
 
 for i in range(n):
       num = int(input())
-      if num > max:
-            max = num
-      elif num < min:
-            min = num
+      if num > mx:
+            mx = num
+      elif num < mn:
+            mn = num
             
-print('Минимум равен', min)
-print('Максимум равен', max)
+print('Минимум равен', mn)
+print('Максимум равен', mx)
 
 
