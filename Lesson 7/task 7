@@ -12,4 +12,4 @@ if none == 0:
 else:
     print(count)
 
-#Переделываю
+
