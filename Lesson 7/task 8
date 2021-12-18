@@ -1,14 +1,14 @@
 n = int(input())
 
-mx = 0
-mn = n
-
 for i in range(n):
     num = int(input())
+    if i == 0:
+        mx = num
+        mn = num
     if num > mx:
         mx = num
     elif num < mn:
         mn = num
-
+            
 print('Минимум равен', mn)
 print('Максимум равен', mx)
