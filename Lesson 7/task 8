@@ -1,6 +1,6 @@
 n = int(input())
 
-max = n
+max = 0
 min = n
 
 for i in range(n):
@@ -13,4 +13,4 @@ for i in range(n):
 print('Минимум равен', min)
 print('Максимум равен', max)
 
-#Переделываю
+
