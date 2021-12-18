@@ -1,0 +1,10 @@
+a = int(input())
+count = 0
+
+while a != 0:
+    last_num = a % 10
+    if last_num == 5:
+        count += 1
+    a = a // 10
+        
+print(count)
