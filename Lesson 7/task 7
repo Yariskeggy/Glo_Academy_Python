@@ -11,3 +11,5 @@ if none == 0:
     print(none)
 else:
     print(count)
+
+#Переделываю
