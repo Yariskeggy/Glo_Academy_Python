@@ -1,0 +1,13 @@
+n = int(input())
+flag = 0
+
+for i in range(n):
+    num = int(input())
+    if num % 2 == 0:
+        flag = flag
+    else:
+        flag += 1
+if flag != 0:
+    print('YES')
+else:
+    print('NO')
