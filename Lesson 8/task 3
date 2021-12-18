@@ -1,0 +1,13 @@
+a = int(input())
+b = a
+total = 0
+
+while b != 0:
+    last_num = b % 10
+    total += last_num
+    b = b // 10
+
+if a % total == 0:
+    print('YES')
+else:
+    print('NO')
