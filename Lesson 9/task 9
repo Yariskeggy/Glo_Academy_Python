@@ -1,0 +1,26 @@
+# Мой вариант, лучше не придумал
+
+n = int(input())
+sum1 = 0
+sum2 = 0
+
+
+for i in range(n):
+    last_digit2 = sum1 % 10
+    sum2 += last_digit2
+    sum1 = sum1 // 10 
+    while n != 0:
+        last_digit1 = n % 10
+        sum1 += last_digit1
+        n = n // 10
+        
+print(sum2)
+
+
+
+# Вариант который нашёл )
+
+n = int(input())
+while n // 10 > 0:
+    n = n // 10 + n % 10
+print(n)
