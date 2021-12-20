@@ -1,0 +1,9 @@
+n = int(input())
+count = 0
+
+for i in range(n + 1):
+    last_digit = i % 10
+    if last_digit == 5:
+        count += 1
+        
+print(count)
