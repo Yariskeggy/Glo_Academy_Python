@@ -1,0 +1,13 @@
+if input().isupper():
+    print('YES')
+else:
+    print('NO')
+
+
+# Вариант С Русским алфовитом:
+
+o = ord(input())
+if o > 1039 and o < 1072:
+    print('YES')
+else:
+    print('NO')    
