@@ -1,0 +1,7 @@
+s = input()
+count = 1
+
+for c in s:
+    if ord(c) == 32:
+        count += 1
+print(count)
