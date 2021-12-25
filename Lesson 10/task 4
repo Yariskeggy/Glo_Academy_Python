@@ -1,0 +1,12 @@
+i = input()
+a = ord(i)
+
+if i.isdigit():
+    print(i)
+else:
+    if a > 96 and a < 123:
+        print(i.upper())
+    elif a > 64 and a < 91:
+        print(i.lower())
+    else:
+        print(i)
