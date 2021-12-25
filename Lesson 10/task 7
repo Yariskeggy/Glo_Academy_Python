@@ -1,0 +1,8 @@
+second_name = input()
+first_name = input()
+third_name = input()
+
+a = first_name[0]
+b = third_name[0]
+
+print(f'{second_name} {a}.{b}.')
