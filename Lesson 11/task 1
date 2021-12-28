@@ -3,3 +3,13 @@ strings = []
 
 for i in range(n):
     strings.append(input())
+
+find = input()
+find = find.lower()
+
+for r in range(len(strings)):
+    s = strings[r]
+    s = s.lower()
+    if find in s:
+        print(strings[r])
+
