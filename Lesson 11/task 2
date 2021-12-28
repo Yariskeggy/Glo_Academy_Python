@@ -1,0 +1,7 @@
+input_str = input()
+
+for c in input_str:
+    if ord(c) == 92:
+        print()
+        continue
+    print(c, end='')
