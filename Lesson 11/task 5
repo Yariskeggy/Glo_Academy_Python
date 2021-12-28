@@ -1,0 +1,11 @@
+input_str = input()
+
+values = []
+values = input_str.split()
+
+for i in range(len(values)):
+    for j in range(i + 1, len(values)):
+        if values[i] == values[j]:
+            del values[j]
+            del values[i]
+print(*values)
