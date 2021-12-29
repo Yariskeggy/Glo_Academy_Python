@@ -1,0 +1,10 @@
+def count_digits():
+    num = int(input())
+    total = 0
+    while num != 0:
+        l = num % 10
+        total += 1
+        num = num // 10
+    return total
+
+print(count_digits() * count_digits())
