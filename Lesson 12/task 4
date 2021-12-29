@@ -1,0 +1,8 @@
+lot = int(input())
+
+def deliv_coast(many):
+    deliv = (many - 1) * 50 + 100
+    return deliv
+
+
+print(deliv_coast(lot))
