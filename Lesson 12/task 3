@@ -1,0 +1,18 @@
+def how_days():
+    num = int(input())
+    days = 0
+    day_31 = [1, 3, 5, 7, 8, 10, 12]
+    day_30 = [4, 6, 9, 11]
+
+    if num > 0 and num < 13:
+        if num in day_31:
+            days = 31
+        elif num in day_30:
+            days = 30
+        elif num == 2:
+            days = 28
+    else:
+        days = ('Нет такого месяца')
+    return days
+        
+print(how_days())
