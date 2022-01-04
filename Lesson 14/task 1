@@ -56,18 +56,25 @@ def generate_password(length, chars):
     return password
 
 
-def password():
-    while True:
+
+def password(more):
+    for i in range(more):
         password = generate_password(*generate_simbols())
         print(password)
-        print('Ещё?')
-        answer = input()
-        if answer == 'Да':
-            continue
-        else:
-            break
+    repeat()
+
+    
+def repeat():
+    print('Ещё?')
+    answer = input()
+    if answer == 'Да':
+        password(1)
+
 
 print('Привет. Я генератор паролей. /n Я задам пару уточняющих вопросов, на\
 основе которых сгенерирую пароль. /nДавай начнём )')
+
+print('Сколько Вам сгенерировать паролей?')
+more = int(input())
     
-password()
+password(more)
