@@ -1,0 +1,73 @@
+import random
+
+def ask_question(question):
+    print(question, 'Нажмите Да или Нет')
+    answer = input()
+    if answer == 'Да':
+        return True
+    else:
+        return False
+
+def generate_simbols():
+    enabled_chars = ''
+    digits = '0123456789'
+    latin_lowarcase = 'abcdefghijklmnopqrstuvwxyz'
+    latin_uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    russian_lowercase = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+    russian_uppercase = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
+    punctuation = '!#$%&*+-=?@^_'
+    
+    print('Введите длину пароля')
+    length = int(input())
+    
+    digits_enabled = ask_question('Включать ли цифры?')
+    latin_lowarcase_enabled = ask_question('Включать ли строчные латинские буквы?')
+    latin_uppercase_enabled = ask_question('Включать ли заглавные латинские буквы?')
+    russian_lowercase_enabled = ask_question('Включать ли строчные кириллические буквы?')
+    russian_uppercase_enabled = ask_question('Включать ли заглавные кириллические буквы?')
+    punctuation_enabled = ask_question('Включать ли знаки пунктуации?')
+    
+    if digits_enabled:
+        enabled_chars += digits
+    
+    if latin_lowarcase_enabled:
+        enabled_chars += latin_lowarcase
+    
+    if latin_uppercase_enabled:
+        enabled_chars += latin_uppercase
+        
+    if russian_lowercase_enabled:
+        enabled_chars += russian_lowercase
+    
+    if russian_uppercase_enabled:
+        enabled_chars += russian_uppercase
+        
+    if punctuation_enabled:
+        enabled_chars += punctuation    
+    return (length, enabled_chars)
+
+
+
+def generate_password(length, chars):
+    password = ''
+    for i in range(length):
+        random_index = random.randint(0, len(chars) - 1)
+        password += chars[random_index]
+    return password
+
+
+def password():
+    while True:
+        password = generate_password(*generate_simbols())
+        print(password)
+        print('Ещё?')
+        answer = input()
+        if answer == 'Да':
+            continue
+        else:
+            break
+
+print('Привет. Я генератор паролей. /n Я задам пару уточняющих вопросов, на\
+основе которых сгенерирую пароль. /nДавай начнём )')
+    
+password()
