@@ -1,12 +1,27 @@
 import random
 
 def ask_question(question):
-    print(question, 'Нажмите Да или Нет')
-    answer = input()
-    if answer == 'Да':
-        return True
-    else:
-        return False
+    while True:
+        print(question, 'Нажмите Да или Нет')
+        answer = input()
+        if answer == 'Да':
+            return True
+        if answer == 'Нет':
+            return False
+        else:
+            continue
+
+def ask_more(question):
+    while True:
+        print(question, 'Введите число от 1 до 200')
+        input_digit = input()
+        if input_digit.isdigit():
+            input_digit = int(input_digit)
+            if input_digit > 0 and input_digit < 200:
+                return input_digit
+        else:
+            continue
+        
 
 def generate_simbols():
     enabled_chars = ''
@@ -17,9 +32,8 @@ def generate_simbols():
     russian_uppercase = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
     punctuation = '!#$%&*+-=?@^_'
     
-    print('Введите длину пароля')
-    length = int(input())
-    
+    length = ask_more('Введите длину пароля. От 1 до 200')
+
     digits_enabled = ask_question('Включать ли цифры?')
     latin_lowarcase_enabled = ask_question('Включать ли строчные латинские буквы?')
     latin_uppercase_enabled = ask_question('Включать ли заглавные латинские буквы?')
@@ -65,16 +79,18 @@ def password(more):
 
     
 def repeat():
-    print('Ещё?')
-    answer = input()
-    if answer == 'Да':
+    repeat_enabled = ask_question('Ещё пароль?')
+    if repeat_enabled:
         password(1)
+   
 
 
 print('Привет. Я генератор паролей. /n Я задам пару уточняющих вопросов, на\
 основе которых сгенерирую пароль. /nДавай начнём )')
 
-print('Сколько Вам сгенерировать паролей?')
-more = int(input())
-    
+
+more = ask_more('Сколько Вам сгенерировать паролей?')
+  
 password(more)
+
+print('Приходите ещё!')
