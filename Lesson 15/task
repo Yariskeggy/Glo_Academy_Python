@@ -1,0 +1,72 @@
+secret_word = 'академия'
+user_word = '********'
+hint = 'Учёбное Заведение'
+
+russian_abc = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+
+def new_games():
+    while True:
+        print('Может новую игру? Да или Нет')
+        answer = input()
+        if answer == 'Да':
+            secret_word = 'эпидемия'
+            user_word = '********'
+            hint = 'Прогрессирующее распространение инфекционного заболевания'
+            games(secret_word, user_word, hint)
+            break
+        elif answer != 'Нет':
+            continue
+        else:
+            break
+
+def update_user_word(secret_word, user_word, char):
+    new_user_word = ''
+    for i in range(len(secret_word)):
+        if secret_word[i] == char:
+            new_user_word += char
+        else:
+            new_user_word += user_word[i]
+    return new_user_word
+
+def is_russian_letter(user_char):
+    if user_char in russian_abc:
+        return True
+
+
+def games(secret_word, user_word, hint):
+    count = 0
+    valid = ''
+    print(f'Подсказка: {hint}')
+    print(user_word)
+    while user_word != secret_word:
+
+        print('Введите букву русского алфавита')
+        user_char = input()
+        user_char = user_char.lower()
+        if len(user_char) == 1:
+
+            if is_russian_letter(user_char):
+
+                if user_char in valid:
+                    print(f'Вы уже вводили букву "{user_char}"')
+                    continue
+
+                count += 1
+                new_user_word = update_user_word(secret_word, user_word, user_char)
+                valid += user_char
+                if user_word == new_user_word:
+                    print('К сожалению, такой буквы в слове НЕТ')
+                else:
+                    print('Поздравляем, Есть такая буква')
+                    user_word = new_user_word
+                    print(user_word)
+
+    print(f'Ура, вы угадали загаданное слово? За {count} попыток )')
+
+    new_games()
+
+    
+print('Добро пожаловать в игру "Поле Чудес"')
+
+games(secret_word, user_word, hint)
+print('Спасибо за Игру!')
