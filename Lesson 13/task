@@ -24,6 +24,7 @@ def want_more():
         more_games_str = more_games_str.lower()
         if more_games_str == ('да'):
             games()
+            break
         elif more_games_str != ('нет'):
             print('Введите Да или Нет')
             continue            
