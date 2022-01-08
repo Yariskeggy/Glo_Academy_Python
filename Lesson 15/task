@@ -70,3 +70,20 @@ print('Добро пожаловать в игру "Поле Чудес"')
 
 games(secret_word, user_word, hint)
 print('Спасибо за Игру!')
+
+
+
+# task 7 Отдельно цикл, без проверок. Не стал тратить время на введения в программу
+
+def question_generator():
+    global secret_word, user_word, hint
+    print('Введите слово')
+    secret_word = input()
+    print('Введите подсказку')
+    hint = input()
+    for i in range(len(secret_word)):
+        user_word += '*'
+    games(secret_word, user_word, hint)
+
+
+question_generator()
