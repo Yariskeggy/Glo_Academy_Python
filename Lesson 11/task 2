@@ -5,3 +5,9 @@ for c in input_str:
         print()
         continue
     print(c, end='')
+
+# Правильный вариант:
+
+path = input('Введите полное имя файла: ')
+for part in path.split('/'):
+    print(part)
