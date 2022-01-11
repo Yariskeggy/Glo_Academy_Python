@@ -1,0 +1,69 @@
+import random
+
+questions = ['Сколько будет два плюс два умноженное на два?',
+    'Бревно нужно распилить на 10 частей, сколько нужно сделать распилов?',
+    'На двух руках 10 пальцев. Сколько пальцев на 5 руках?',
+    'Укол делают каждые полчаса, сколько нужно минут для трёх уколов?',
+    'Пять свечей горело, две потухли. Сколько свечей осталось?']
+
+answer = [6, 9, 25, 60, 2]
+
+def more_game():
+    while True:
+        print('Желаете пройти тест ещё раз? Да или Нет')
+        more_games_input = input()
+        if more_games_input == 'Да':
+            my_tester_game(user_name)
+            break
+        elif more_games_input != 'Нет':
+            continue
+        else:
+            print('Спасибо за игру!')
+            break
+
+def result_game(count):
+    if count == 0:
+        return 'Идиот'
+    elif count == 1:
+        return 'Кретин'
+    elif count == 2:
+        return 'Дурак'
+    elif count == 3:
+        return 'Нормальный'
+    elif count == 4:
+        return 'Талант'
+    elif count > 4:
+        return 'Гений'
+
+def my_tester_game(user_name):
+
+    print(f'Ну чтож {user_name}, начнём )')
+
+    count_right_answer = 0
+
+    number_of_questions = [0, 1, 2, 3, 4]
+    
+    for i in range(5):
+        random_index = random.randint(0, len(number_of_questions) - 1)
+        random_question = int(number_of_questions[random_index])
+
+        print(f'Билет номер {random_question + 1}')
+        
+        print(questions[random_question])
+
+        user_answer = int(input())
+
+        right_answer = answer[random_question]
+
+        if user_answer == right_answer:
+            count_right_answer += 1  
+
+        number_of_questions.pop(random_index)
+    print(f'{user_name}, количество Ваших правильных ответов = {count_right_answer} Позравляем. Вы - {result_game(count_right_answer)}.')
+    more_game()
+
+
+print('Добрый день! Пожалуйста представтесь.')
+user_name = input()  
+    
+my_tester_game(user_name)
