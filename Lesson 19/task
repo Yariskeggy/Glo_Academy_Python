@@ -1,0 +1,115 @@
+import random
+
+questions = ['Сколько будет два плюс два умноженное на два?',
+    'Бревно нужно распилить на 10 частей, сколько нужно сделать распилов?',
+    'На двух руках 10 пальцев. Сколько пальцев на 5 руках?',
+    'Укол делают каждые полчаса, сколько нужно минут для трёх уколов?',
+    'Пять свечей горело, две потухли. Сколько свечей осталось?']
+
+answer = [6, 9, 25, 60, 2]
+
+
+
+def more_game():
+    while True:
+        print('Желаете пройти тест ещё раз? Да или Нет')
+        more_games_input = input()
+        if more_games_input.upper() == 'ДА':
+            my_tester_game(user_name)
+            break
+        elif more_games_input.upper() != 'НЕТ':
+            continue
+        else:
+            print('Спасибо за игру!')
+            break
+        
+def is_digit():
+    while True:
+        print('Введите число')
+        answer = input()
+        if answer.isdigit():
+            answer = int(answer)
+            break
+        else:
+            continue
+    return answer
+
+def result_game(count_right_answer):
+    number_of_questions = len(questions)
+    count = (count_right_answer * 100 // number_of_questions) // 20
+    
+    if count == 0:
+        return 'Идиот'
+    elif count == 1:
+        return 'Кретин'
+    elif count == 2:
+        return 'Дурак'
+    elif count == 3:
+        return 'Нормальный'
+    elif count == 4:
+        return 'Талант'
+    elif count > 4:
+        return 'Гений'
+
+def show_records():
+    save_file = open('save.txt', 'r')
+    user_name = 'Имя:'
+    count_right_answer = 'Верных ответов:'
+    user_result = 'Резултьтат:'
+    
+    print(f'{user_name:10}{count_right_answer:20}{user_result:10}')
+    
+    for i in save_file:
+        i = i.strip('\n')
+        values = i.split('/')
+        print(f'{values[0]:10}{values[1]:20}{values[2]:10}')
+
+    #save_file.close
+
+def my_tester_game(user_name):
+
+    print(f'Ну чтож {user_name}, начнём )')
+
+    count_right_answer = 0
+
+    number_of_questions = [0, 1, 2, 3, 4]
+    
+    for i in range(5):
+        random_index = random.randint(0, len(number_of_questions) - 1)
+        random_question = int(number_of_questions[random_index])
+
+        print(f'Билет номер {random_question + 1}')
+        
+        print(questions[random_question])
+
+        user_answer = is_digit()
+
+        right_answer = answer[random_question]
+
+        if user_answer == right_answer:
+            count_right_answer += 1  
+
+        number_of_questions.pop(random_index)
+        
+    result = result_game(count_right_answer)
+    print(f'{user_name}, количество Ваших правильных ответов = {count_right_answer} Позравляем! Вы - {result}.')
+    
+    save_file = open('save.txt', 'a')
+    save_file.write(f'{user_name}/{count_right_answer}/{result}\n')
+    save_file.close
+    
+    print('Желаете посмотреть результаты других игроков?')
+    user_answer = input()
+    if user_answer.upper() == 'ДА':
+        show_records()
+        
+    more_game()
+
+
+        
+print('Добрый день! Пожалуйста представьтесь.')
+user_name = input()
+
+my_tester_game(user_name)
+
+show_records()
