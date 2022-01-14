@@ -96,7 +96,7 @@ def my_tester_game(user_name):
     
     save_file = open('save.txt', 'a')
     save_file.write(f'{user_name}/{count_right_answer}/{result}\n')
-    save_file.close
+    save_file.close()
     
     print('Желаете посмотреть результаты других игроков?')
     user_answer = input()
