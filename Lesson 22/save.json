@@ -1,0 +1,50 @@
+[
+    {
+        "py/object": "__main__.User",
+        "name": "Вмми",
+        "count_right_answer": 0,
+        "result": "Идиот"
+    },
+    {
+        "py/object": "__main__.User",
+        "name": "йцуу",
+        "count_right_answer": 0,
+        "result": "Идиот"
+    },
+    {
+        "py/object": "__main__.User",
+        "name": "Виктор",
+        "count_right_answer": 5,
+        "result": "Гений"
+    },
+    {
+        "py/object": "__main__.User",
+        "name": "Йцукер",
+        "count_right_answer": 3,
+        "result": "Нормальный"
+    },
+    {
+        "py/object": "__main__.User",
+        "name": "Виктор2",
+        "count_right_answer": 2,
+        "result": "Дурак"
+    },
+    {
+        "py/object": "__main__.User",
+        "name": "Витя",
+        "count_right_answer": 0,
+        "result": "Идиот"
+    },
+    {
+        "py/object": "__main__.User",
+        "name": "Виктор",
+        "count_right_answer": 3,
+        "result": "Нормальный"
+    },
+    {
+        "py/object": "__main__.User",
+        "name": "Прынц",
+        "count_right_answer": 0,
+        "result": "Идиот"
+    }
+]
