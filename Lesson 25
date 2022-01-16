@@ -1,0 +1,11 @@
+from pyowm import OWM
+from pyowm.utils import config
+from pyowm.utils import timestamps
+
+owm = OWM('da20187d863b6ba1a54305285365332b')
+mgr = owm.weather_manager()
+
+observation = mgr.weather_at_place('Moscow')
+w = observation.weather
+
+print(w.temperature('celsius'))
