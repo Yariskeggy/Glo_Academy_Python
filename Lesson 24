@@ -143,10 +143,22 @@ while True:
                
     for ball in balls:
         ball.move()
-        if ball.center_x <= ball.radius:
-            left_touch += 1
-            print(left_touch)
         
+    if ball.center_x <= ball.radius:
+        left_touch += 1
+        print(f'Косаний слева {left_touch}')
+
+    if ball.center_x >= width - ball.radius:
+        right_touch += 1
+        print(f'Косаний справа {right_touch}')
+        
+    if ball.center_y <= ball.radius:
+        top_touch += 1
+        print(f'Косаний сверху {top_touch}')
+
+    if ball.center_y >= heigth - ball.radius:
+        bottom_touch += 1
+        print(f'Косаний снизу {bottom_touch}')
     
     pygame.display.flip()
     clock.tick(60)
