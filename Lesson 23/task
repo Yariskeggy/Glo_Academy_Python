@@ -113,9 +113,9 @@ while True:
                 if is_in_form(center_x, center_y):
 
                     count += 1
-
-               
             print(count)
+        break
+
 
                     
                 
