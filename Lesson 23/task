@@ -71,7 +71,7 @@ class RandomPointMovableBall(RandomPointBall):
 
         
 def is_in_form(x, y):
-    if x < (heigth - 15) and x > 15 and y < (width - 15) and y > 15:
+    if x < (width - 15) and x > 15 and y < (heigth - 15) and y > 15:
         return True
     else:
         return False
