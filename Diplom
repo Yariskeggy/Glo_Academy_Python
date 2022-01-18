@@ -1,0 +1,41 @@
+from pyowm import OWM
+from pyowm.utils import config
+from pyowm.utils import timestamps
+from pyowm.utils.config import get_default_config
+
+config_dict = get_default_config()
+config_dict['language'] = 'ru'
+owm = OWM('da20187d863b6ba1a54305285365332b', config_dict)
+owm.supported_languages
+config_dict = owm.config
+mgr = owm.weather_manager()
+print(mgr)
+
+def print_result(city, temp, status):
+    print(f'В Городе {city}:')
+    print(f'Температура воздуха: {temp:<10}На улице: {status:15}')
+
+print('Здравствуйте! В каком городе Вас интересует погода?')
+
+while True:
+    print('Введите название города')
+    user_answer = input()
+    if user_answer.isdigit():
+        continue
+    else:
+        city = user_answer
+        try:
+            observation = mgr.weather_at_place(city)
+        except:
+            print('Такого, города нет (')
+            continue
+        else:
+            observation = mgr.weather_at_place(city)
+            break        
+
+
+w = observation.weather
+temp = w.temperature('celsius')['temp']
+status = w.status
+
+print_result(city, temp, status)
