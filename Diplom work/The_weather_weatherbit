@@ -1,15 +1,12 @@
 import requests
-from textblob import TextBlob
 
 api_key = "fdf2237ce0864875868b0a0b2049adc9"
 
 def print_result(city, temp, status):
-    blob = TextBlob(status)
-    russian = str(blob.translate(to='ru'))
-    sep = '-----------------------------------------------------'
+    sep = '----------------------------------------------------------'
     temperature = f'{temp}°C'
     print(f'В Городе {city}: \n{sep}')
-    print(f'Температура воздуха: {temperature:<10}На улице: {russian:15} \n{sep}')
+    print(f'Температура воздуха: {temperature:<10}На улице: {status:15} \n{sep}')
 
 
 print('Здравствуйте! В каком городе Вас интересует погода?')
@@ -19,8 +16,8 @@ while True:
     city = input()   
     if city.isdigit():
         continue
-
-    url = f'https://api.weatherbit.io/v2.0/current?&city={city}&key={api_key}&include=minutely'
+    
+    url = f'https://api.weatherbit.io/v2.0/current?&city={city}&key={api_key}&include=minutely&lang=ru'
     r = requests.get(url)
 
     try:
