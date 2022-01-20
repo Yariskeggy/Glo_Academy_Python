@@ -1,0 +1,306 @@
+#Не даёт записать Пользователя, если с таким именим уже есть ( 
+
+import random
+import os
+
+import jsonpickle
+
+import sqlite3
+
+
+class FileProvider:
+    def get(self, path):
+        file = open(path, 'r')
+        data = file.read()
+        file.close()
+
+    def append(self, path, data):
+        file = open(path, 'a')
+        data = file.write(data)
+        file.close
+
+    def writelines(self, path, data):
+        file = open(path, 'w')
+        data = file.writelines(data)
+        file.close()
+
+    def clear(self, path):
+        file = open(path, 'w')
+        data = file.write('')
+        file.close()
+
+    def exists(self, path):
+        return os.path.exists(path)
+
+
+class Question:
+    def __init__(self, text, answer):
+        self.text = text
+        self.answer = answer
+
+
+class QuestionStorage:
+    def __init__(self, connection):
+        self.connection = connection
+
+        cursor = connection.cursor()
+
+        cursor.execute('''SELECT count(name) FROM sqlite_master WHERE type='table' AND name='questions' ''')
+
+        if cursor.fetchone()[0] == 0:
+            cursor.execute(''' CREATE TABLE IF NOT EXISTS questions(
+            text TEXT PRIMARY KEY,
+            Answer INTEGER);''')
+
+            questions = [Question('Сколько будет два плюс два умноженное на два?', 6),
+                         Question('Бревно нужно распилить на 10 частей, сколько нужно сделать распилов?', 9),
+                         Question('На двух руках 10 пальцев. Сколько пальцев на 5 руках?', 25),
+                         Question('Укол делают каждые полчаса, сколько нужно минут для трёх уколов?', 60),
+                         Question('Пять свечей горело, две потухли. Сколько свечей осталось?', 2)]
+            self.safe_questions(questions)
+
+    def get_all(self):
+            cursor = self.connection.cursor()
+
+            cursor.execute('SELECT * FROM questions;')
+            all_result = cursor.fetchall()
+            questions = []
+
+            for result in all_result:
+                question = Question(result[0], result[1])
+                questions.append(question)
+
+            return questions
+
+    def safe_questions(self, questions):
+        for question in questions:
+            self.add(question)
+
+    def add(self, question):
+        query = f"""INSERT INTO questions (Text,Answer) VALUES('{question.text}','{question.answer}');"""
+
+        cursor = self.connection.cursor()
+        cursor.execute(query)
+        self.connection.commit()
+
+    def remove(self, index):
+        questions = self.get_all()
+        question_for_delete = questions.pop(index)
+
+        query = f"""DELETE FROM questions WHERE Text = '{question_for_delete.text}';"""
+
+        cursor = self.connection.cursor()
+        cursor.execute(query)
+        self.connection.commit()
+
+
+class User:
+    def __init__(self, name, count_right_answer=0, result='Неизвестно'):
+        self.name = name
+        self.count_right_answer = count_right_answer
+        self.result = result
+
+    def accept_right_answer(self):
+        self.count_right_answer += 1
+
+    def set_result(self, result):
+        self.result = result
+
+
+class UsersResultStorage:
+    def __init__(self, connection):
+        self.connection = connection
+
+        cursor = connection.cursor()
+
+        cursor.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='users' ''')
+
+        cursor.execute("""CREATE  TABLE IF NOT EXISTS users(
+        Name TEXT PRIMARY KEY,
+        Count_right_answer INTEGER,
+        Result TEXT);""")
+                
+        #connection.commit()
+        #users = []
+        #self.safe(users)
+
+    def safe(self, users):
+        for user in users:
+            self.add(user)
+
+    def add(self, user):
+        query = f"""INSERT INTO users (Name,Count_right_answer,Result) VALUES('{user.name}', '{user.count_right_answer}', '{user.result}');"""
+        cursor = self.connection.cursor()
+        cursor.execute(query)
+        self.connection.commit()
+
+    def get_all(self):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM users;")
+        all_results = cursor.fetchall()
+        users = []
+
+        for result in all_results:
+            user = User(result[0], result[1], result[2])
+            users.append(user)
+
+        return users
+
+
+def more_game():
+    while True:
+        print('Желаете пройти тест ещё раз? Да или Нет')
+        more_games_input = input()
+        if more_games_input.upper() == 'ДА':
+            my_tester_game()
+            break
+        elif more_games_input.upper() != 'НЕТ':
+            continue
+        else:
+            print('Спасибо за игру!')
+            break
+
+
+def is_digit():
+    while True:
+        print('Введите число')
+        answer = input()
+        if answer.isdigit():
+            answer = int(answer)
+            break
+        else:
+            continue
+    return answer
+
+
+def result_game(count_right_answer):
+    questions = questionStorage.get_all()
+    number_of_questions = len(questions)
+    count = (count_right_answer * 100 // number_of_questions) // 20
+
+    if count == 0:
+        return 'Идиот'
+    elif count == 1:
+        return 'Кретин'
+    elif count == 2:
+        return 'Дурак'
+    elif count == 3:
+        return 'Нормальный'
+    elif count == 4:
+        return 'Талант'
+    elif count > 4:
+        return 'Гений'
+
+
+def show_records():
+    user_name = 'Имя:'
+    count_right_answer = 'Верных ответов:'
+    user_result = 'Резултьтат:'
+    print(f'{user_name:10}{count_right_answer:20}{user_result:10}')
+
+    users = usersResultStorage.get_all()
+
+    for user in users:
+        print(f'{user.name:10}{user.count_right_answer:<20}{user.result:10}')
+
+
+def add_new_question():
+    print('Введите текст вопроса')
+    text = input()
+    print('Введите ответ на вопрос')
+    answer = is_digit()
+    new_question = Question(text, answer)
+    questionStorage.add(new_question)
+
+
+def print_questions(questions):
+    print('--------------------------------------------')
+    for i in range(len(questions)):
+        print(f'{i+1}.{questions[i].text}')
+
+    print('--------------------------------------------')
+
+
+def remove_question():
+    questions = questionStorage.get_all()
+    while True:
+        print('Выберите номер вопроса, который нужно удалить')
+
+        print_questions(questions)
+
+        user_answer = is_digit()
+        if user_answer < 1 or user_answer > len(questions):
+            continue
+
+        questionStorage.remove(user_answer - 1)
+
+        print(f'Ура! Вопрос номер {user_answer} удалён')
+        break
+
+
+connection = sqlite3.connect('MyTester.db')
+connect = sqlite3.connect('Result.db')
+file_provider = FileProvider()
+questionStorage = QuestionStorage(connection)
+usersResultStorage = UsersResultStorage(connection)
+
+
+jsonpickle.set_encoder_options('json', indent=4,
+                               separators=(',', ': '),
+                               ensure_ascii=False)
+
+def my_tester_game():
+
+    print('Добрый день! Пожалуйста представьтесь.')
+    user_name = input()
+    user = User(user_name)
+
+    questions = questionStorage.get_all()
+
+    print(f'Ну чтож {user_name}, начнём )')
+
+    count_right_answer = 0
+
+    for i in range(len(questions)):
+
+        random_index = random.randint(0, len(questions) - 1)
+
+        print(f'Билет номер {i + 1}')
+
+        print(questions[random_index].text)
+
+        user_answer = is_digit()
+
+        right_answer = questions[random_index].answer
+
+        if user_answer == right_answer:
+            user.accept_right_answer()
+
+        questions.pop(random_index)
+
+    result = result_game(user.count_right_answer)
+    user.set_result(result)
+    print(f'{user_name}, количество Ваших правильных ответов = {user.count_right_answer} Позравляем! Вы - {result}.')
+
+    usersResultStorage.add(user)
+
+    print('Желаете посмотреть результаты других игроков?')
+
+    user_answer = input()
+    if user_answer.upper() == 'ДА':
+        show_records()
+
+    print('Хотите добавить новый вопрос? Отправьте слово Да')
+    user_answer = input()
+    if user_answer.upper() == 'ДА':
+        add_new_question()
+
+    print('Хотите удалить вопрос? Отправьте слово Да')
+    user_answer = input()
+    if user_answer.upper() == 'ДА':
+        remove_question()
+
+    more_game()
+
+
+my_tester_game()
