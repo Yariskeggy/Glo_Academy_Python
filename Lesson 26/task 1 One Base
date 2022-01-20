@@ -1,4 +1,5 @@
 #Не даёт записать Пользователя, если с таким именим уже есть ( 
+# Добавил query = f"""INSERT or REPLACE (
 
 import random
 import os
@@ -129,7 +130,7 @@ class UsersResultStorage:
             self.add(user)
 
     def add(self, user):
-        query = f"""INSERT INTO users (Name,Count_right_answer,Result) VALUES('{user.name}', '{user.count_right_answer}', '{user.result}');"""
+        query = f"""INSERT or REPLACE INTO users (Name,Count_right_answer,Result) VALUES('{user.name}', '{user.count_right_answer}', '{user.result}');"""
         cursor = self.connection.cursor()
         cursor.execute(query)
         self.connection.commit()
